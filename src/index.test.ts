@@ -1,8 +1,10 @@
 import {createEditor, doc, p} from 'jest-prosemirror';
-import {Transaction} from 'prosemirror-state';
+import {EditorState, Transaction} from 'prosemirror-state';
+import {Transform} from 'prosemirror-transform';
 import {VideoPlugin} from './index';
 import {VideoEditorState} from './ui/VideoEditor';
-import {insertIFrame} from './VideoSourceCommand';
+import VideoSourceCommand, {insertIFrame} from './VideoSourceCommand';
+import 'jest-json';
 
 describe('VideoPlugin', () => {
   it('should handle Video', () => {
@@ -20,11 +22,42 @@ describe('VideoPlugin', () => {
       validValue: true,
     };
 
-    editor.view.dispatch(
-      insertIFrame(editor.state.tr, schema, veState) as Transaction
+    const state: EditorState = EditorState.create({
+      schema: schema,
+      selection: editor.selection,
+      plugins: [new VideoPlugin()],
+    });
+
+    const newState = state.apply(
+      insertIFrame(state.tr, schema, veState) as Transaction
     );
 
-    // Not complete...
-    expect(editor.doc).toEqualProsemirrorNode(editor.doc);
+    new VideoSourceCommand().executeWithUserInput(
+      state,
+      editor.view.dispatch as (tr: Transform) => void,
+      editor.view,
+      veState
+    );
+
+    const json = state.doc.toJSON();
+    const videoJSON = newState.doc.toJSON();
+
+    expect(json).not.toEqual(videoJSON);
+
+    expect(JSON.stringify(videoJSON)).toContain(
+      JSON.stringify({
+        type: 'video',
+        attrs: {
+          align: null,
+          alt: '',
+          crop: null,
+          height: 113,
+          rotate: null,
+          src: 'https://www.youtube.com/embed/ru60J99ojJw',
+          title: '',
+          width: 200,
+        },
+      })
+    );
   });
 });

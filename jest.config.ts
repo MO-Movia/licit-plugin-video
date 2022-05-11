@@ -130,7 +130,7 @@ export default {
   setupFiles: ['../jest.setup.js'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['jest-prosemirror/environment'],
+  setupFilesAfterEnv: ['jest-prosemirror/environment', 'jest-json'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -148,9 +148,9 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-   testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-     "**/?(*.)+(spec|test).[tj]s?(x)"
+  testMatch: [
+    //   "**/__tests__/**/*.[jt]s?(x)",
+    '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -175,7 +175,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-   "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
