@@ -11,11 +11,13 @@ import Icon from './Icon';
 import ImageInlineEditor from './ImageInlineEditor';
 import VideoResizeBox from './VideoResizeBox';
 import {MIN_SIZE} from './VideoResizeBox';
-import {atAnchorBottomCenter} from './PopUpPosition';
+import {
+  atAnchorBottomCenter,
+  createPopUp,
+} from '@modusoperandi/licit-ui-commands';
+import {v1 as uuid} from 'uuid';
 import ResizeObserver from './ResizeObserver';
-import createPopUp from './createPopUp';
 import resolveVideo from './resolveVideo';
-import uuid from './uuid';
 
 import './czi-image-view.css';
 

@@ -4,7 +4,6 @@ import {Transform} from 'prosemirror-transform';
 import {VideoPlugin} from './index';
 import {VideoEditorState} from './ui/VideoEditor';
 import VideoSourceCommand, {insertIFrame} from './VideoSourceCommand';
-import 'jest-json';
 
 describe('VideoPlugin', () => {
   it('should handle Video', () => {
@@ -15,10 +14,21 @@ describe('VideoPlugin', () => {
 
     const schema = plugin.getEffectiveSchema(editor.schema);
 
-    const veState: VideoEditorState = {
-      src: 'https://www.youtube.com/embed/ru60J99ojJw',
-      width: 200,
+    const attrs = {
+      align: null,
+      alt: '',
+      crop: null,
       height: 113,
+      rotate: null,
+      src: 'https://www.youtube.com/embed/ru60J99ojJw',
+      title: '',
+      width: 200,
+    };
+
+    const veState: VideoEditorState = {
+      src: attrs.src,
+      width: attrs.width,
+      height: attrs.height,
       validValue: true,
     };
 
@@ -47,16 +57,7 @@ describe('VideoPlugin', () => {
     expect(JSON.stringify(videoJSON)).toContain(
       JSON.stringify({
         type: 'video',
-        attrs: {
-          align: null,
-          alt: '',
-          crop: null,
-          height: 113,
-          rotate: null,
-          src: 'https://www.youtube.com/embed/ru60J99ojJw',
-          title: '',
-          width: 200,
-        },
+        attrs: attrs,
       })
     );
   });

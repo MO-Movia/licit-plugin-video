@@ -10,10 +10,14 @@ import {
 } from './CursorPlaceholderPlugin';
 import {VIDEO} from './Constants';
 import {UICommand} from '@modusoperandi/licit-doc-attrs-step';
-import createPopUp from './ui/createPopUp';
-import { VideoEditorState } from './ui/VideoEditor';
+import {createPopUp} from '@modusoperandi/licit-ui-commands';
+import {VideoEditorState} from './ui/VideoEditor';
 
-export function insertIFrame(tr: Transform, schema: Schema, config?: VideoEditorState): Transform {
+export function insertIFrame(
+  tr: Transform,
+  schema: Schema,
+  config?: VideoEditorState
+): Transform {
   const {selection} = tr as Transaction;
   if (!selection) {
     return tr;

@@ -85,6 +85,7 @@
   },
   "dependencies": {
     "@modusoperandi/licit-doc-attrs-step": "^0.1.1",
+    "@modusoperandi/licit-ui-commands": "github:MO-Movia/licit-ui-components#typescript_conversion",
     "@types/node": "^16.10.1",
     "@types/prosemirror-state": "^1.3.0",
     "@types/react": "^17.0.24",

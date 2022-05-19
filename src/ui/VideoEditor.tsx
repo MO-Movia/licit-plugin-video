@@ -1,7 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import preventEventDefault from './preventEventDefault';
-import CustomButton from './CustomButton';
+import {
+  preventEventDefault,
+  CustomButton,
+} from '@modusoperandi/licit-ui-commands';
 
 import './czi-form.css';
 import './czi-video-url-editor.css';
